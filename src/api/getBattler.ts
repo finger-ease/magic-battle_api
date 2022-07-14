@@ -1,3 +1,1 @@
-const getBattler = (name: string) => name;
-
-export default getBattler;
+export const getBattler = (name: string) => name;

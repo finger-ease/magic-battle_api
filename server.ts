@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
-import getBattler from './src/api/getBattler';
+import { getBattler } from './src/api/getBattler';
 
 const server = express();
 server.get('/:name', (req, res) => {
