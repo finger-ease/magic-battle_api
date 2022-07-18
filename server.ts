@@ -4,8 +4,7 @@ import { getBattler } from './src/api/getBattler';
 
 const server = express();
 server.get('/:name', (req, res) => {
-  const battler = getBattler(req.params.name);
-  res.status(200).json({ message: battler });
+  res.status(200).json(getBattler(req.params.name));
 });
 
 server.listen(process.env.PORT);
