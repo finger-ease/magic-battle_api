@@ -1,47 +1,49 @@
-import crypto from 'crypto';
 import { BattlerType } from '../types/Battler';
+import { HitPoint } from '../useCase/parameter/HitPoint';
+import { MagicPoint } from '../useCase/parameter/MagicPoint';
+import { Strength } from '../useCase/parameter/Strength';
+import { Defense } from '../useCase/parameter/Defense';
+import { Intelligence } from '../useCase/parameter/Intelligence';
+import { Resist } from '../useCase/parameter/Resist';
+import { Agility } from '../useCase/parameter/Agility';
+import { Element } from '../useCase/parameter/Element';
+import { Slide } from '../useCase/Slide';
 
 export class Battler {
-  private name: string;
-  private hp: number;
-  private mp: number;
-  private str: number;
-  private def: number;
-  private int: number;
-  private res: number;
-  private agi: number;
-  private hash: string;
+  private _name: string;
+  private _HitPoint: HitPoint;
+  private _MagicPoint: MagicPoint;
+  private _Strength: Strength;
+  private _Defense: Defense;
+  private _Intelligence: Intelligence;
+  private _Resist: Resist;
+  private _Agility: Agility;
+  private _Element: Element;
 
   constructor(name: string) {
-    this.name = name;
-    this.hash = this.nameToHash(name);
-    this.hp = this.hashToNumber(this.hash, 0);
-    this.mp = this.hashToNumber(this.hash, 1);
-    this.str = this.hashToNumber(this.hash, 2);
-    this.def = this.hashToNumber(this.hash, 3);
-    this.int = this.hashToNumber(this.hash, 4);
-    this.res = this.hashToNumber(this.hash, 5);
-    this.agi = this.hashToNumber(this.hash, 6);
+    this._name = name;
+    this._HitPoint = new HitPoint(name);
+    this._MagicPoint = new MagicPoint(name);
+    this._Strength = new Strength(name);
+    this._Defense = new Defense(name);
+    this._Intelligence = new Intelligence(name);
+    this._Resist = new Resist(name);
+    this._Agility = new Agility(name);
+    this._Element = new Element(name);
+    Slide.init();
   }
 
-  private nameToHash(name: string) {
-    return crypto.createHash('sha256').update(name, 'utf8').digest('hex');
-  }
-
-  private hashToNumber(hash: string, slide: number) {
-    return (parseInt(hash.substring(slide * 4, (slide + 1) * 4), 16) % 100) + 1;
-  }
-
-  get params(): BattlerType {
+  get parameters(): BattlerType {
     return {
-      name: this.name,
-      hp: this.hp,
-      mp: this.mp,
-      str: this.str,
-      def: this.def,
-      int: this.int,
-      res: this.res,
-      agi: this.agi,
+      name: this._name,
+      hitPoint: this._HitPoint.parameter,
+      magicPoint: this._MagicPoint.parameter,
+      strength: this._Strength.parameter,
+      defense: this._Defense.parameter,
+      intelligence: this._Intelligence.parameter,
+      resist: this._Resist.parameter,
+      agility: this._Agility.parameter,
+      element: this._Element.element,
     };
   }
 }
