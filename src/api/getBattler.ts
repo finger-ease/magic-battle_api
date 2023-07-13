@@ -1,5 +1,5 @@
 import { Battler } from '../model/Battler';
-import { BattlerType } from '../types/Battler';
+import { battlerType } from '../types/battler';
 
-export const getBattler = (name: string): BattlerType =>
+export const getBattler = (name: string): battlerType =>
   new Battler(name).parameters;

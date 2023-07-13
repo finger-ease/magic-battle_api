@@ -1,7 +1,7 @@
-export type BattlerType = {
+export type battlerType = {
   name: string;
   hitPoint: number;
-  magicPoint: number;
+  actionPoint: number;
   strength: number;
   defense: number;
   intelligence: number;

@@ -1,6 +1,6 @@
-import { BattlerType } from '../types/Battler';
+import { battlerType } from '../types/battler';
 import { HitPoint } from '../useCase/parameter/HitPoint';
-import { MagicPoint } from '../useCase/parameter/MagicPoint';
+import { ActionPoint } from '../useCase/parameter/ActionPoint';
 import { Strength } from '../useCase/parameter/Strength';
 import { Defense } from '../useCase/parameter/Defense';
 import { Intelligence } from '../useCase/parameter/Intelligence';
@@ -12,7 +12,7 @@ import { Slide } from '../useCase/Slide';
 export class Battler {
   private _name: string;
   private _HitPoint: HitPoint;
-  private _MagicPoint: MagicPoint;
+  private _ActionPoint: ActionPoint;
   private _Strength: Strength;
   private _Defense: Defense;
   private _Intelligence: Intelligence;
@@ -23,7 +23,7 @@ export class Battler {
   constructor(name: string) {
     this._name = name;
     this._HitPoint = new HitPoint(name);
-    this._MagicPoint = new MagicPoint(name);
+    this._ActionPoint = new ActionPoint(name);
     this._Strength = new Strength(name);
     this._Defense = new Defense(name);
     this._Intelligence = new Intelligence(name);
@@ -33,17 +33,17 @@ export class Battler {
     Slide.init();
   }
 
-  get parameters(): BattlerType {
+  get parameters(): battlerType {
     return {
       name: this._name,
       hitPoint: this._HitPoint.parameter,
-      magicPoint: this._MagicPoint.parameter,
+      actionPoint: this._ActionPoint.parameter,
       strength: this._Strength.parameter,
       defense: this._Defense.parameter,
       intelligence: this._Intelligence.parameter,
       resist: this._Resist.parameter,
       agility: this._Agility.parameter,
-      element: this._Element.element,
+      element: this._Element.element.name,
     };
   }
 }

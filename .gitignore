@@ -181,4 +181,4 @@ dist
 .svelte-kit
 
 
-db/
+data/
